@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using FizzBuzzWeb.Models;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace FizzBuzzWeb.Pages
 {
@@ -27,8 +29,9 @@ namespace FizzBuzzWeb.Pages
         {       
             if (ModelState.IsValid)
             {
-                Alert = FizzBuzz.CheckNumber();
-                return Page();
+                //Alert = FizzBuzz.CheckNumber();
+                HttpContext.Session.SetString("Data", JsonConvert.SerializeObject(FizzBuzz));
+                return RedirectToPage("./SavedInSession");
             }
 
             Alert = String.Empty;
