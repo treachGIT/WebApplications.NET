@@ -1,0 +1,12 @@
+﻿@page
+@model LataPrzestepne.Pages.SavedModel
+@{
+
+}
+
+<ul class="list-group">
+@foreach(var birthday in @Model.birthdays)
+{
+  <li class="list-group-item">@birthday.SavedMessage</li>
+}
+</ul>
