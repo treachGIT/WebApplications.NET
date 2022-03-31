@@ -11,9 +11,6 @@ namespace FizzBuzzWeb.Pages
         [BindProperty]
         public FizzBuzz FizzBuzz { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public string Name { get; set; }
-
         public string Alert { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -24,47 +21,19 @@ namespace FizzBuzzWeb.Pages
         public void OnGet()
         {
             Alert = String.Empty;
-
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                Name = "User";
-            }
         }
 
         public IActionResult OnPost()
-        {
-            Alert = String.Empty;
-
-            if (!ModelState.IsValid)
+        {       
+            if (ModelState.IsValid)
             {
-                CheckNumber();
+                Alert = FizzBuzz.CheckNumber();
                 return Page();
             }
 
+            Alert = String.Empty;
             return Page();
         }
 
-        public void CheckNumber()
-        {
-            if (FizzBuzz.Number % 3 == 0)
-            {
-                if (FizzBuzz.Number % 5 == 0)
-                {
-                    Alert = "FizzBuzz";
-                }
-                else
-                {
-                    Alert = "Fizz";
-                }
-            }
-            else if (FizzBuzz.Number % 5 == 0)
-            {
-                Alert = "Buzz";
-            }
-            else
-            {           
-                Alert = "Liczba: " + FizzBuzz.Number.ToString() + " nie spełnia kryteriów FizzBuzz";
-            }
-        }
     }
 }
