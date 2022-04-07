@@ -1,3 +1,4 @@
+using LataPrzestepne.Data;
 using LataPrzestepne.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,15 +8,16 @@ namespace LataPrzestepne.Pages
 {
     public class SavedModel : PageModel
     {
-        public List<Birthday> birthdays { get; set; }
+        public List<Birthday> Birthdays { get; set; }
         public void OnGet()
         {
-            birthdays = new List<Birthday>();
+            Birthdays = new List<Birthday>();
 
             var Data = HttpContext.Session.GetString("Data");
 
             if (Data != null)
-                birthdays = JsonConvert.DeserializeObject<List<Birthday>>(Data);
+                Birthdays = JsonConvert.DeserializeObject<List<Birthday>>(Data);
         }
     }
+    
 }

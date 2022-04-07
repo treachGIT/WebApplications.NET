@@ -5,8 +5,8 @@
 }
 
 <ul class="list-group">
-@foreach(var birthday in @Model.birthdays)
+@foreach(var birthday in @Model.Birthdays)
 {
-  <li class="list-group-item">@birthday.SavedMessage</li>
+  <li class="list-group-item">@birthday.GetMessageForHistory()</li>
 }
 </ul>

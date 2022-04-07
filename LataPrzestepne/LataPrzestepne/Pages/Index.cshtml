@@ -12,6 +12,11 @@
             <b><span asp-validation-for="Birthday.Name" class="form-text text-danger"></span></b>
          </div>
          <div class="form-group">
+            <b> <label asp-for="Birthday.Surname" style="margin-bottom:10px"></label></b>
+            <input asp-for="Birthday.Surname" class="form-control" style="margin-bottom:5px" />
+            <b><span asp-validation-for="Birthday.Surname" class="form-text text-danger"></span></b>
+         </div>
+         <div class="form-group">
             <b> <label asp-for="Birthday.Year" style="margin-bottom:10px"></label></b>
             <input asp-for="Birthday.Year" class="form-control" style="margin-bottom:5px" />
             <b><span asp-validation-for="Birthday.Year" class="form-text text-danger"></span></b>
