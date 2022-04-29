@@ -1,5 +1,7 @@
 using LataPrzestepne.Data;
+using LataPrzestepne.Dto;
 using LataPrzestepne.Models;
+using LataPrzestepne.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -8,18 +10,18 @@ namespace LataPrzestepne.Pages
 {
     public class LastSearchModel : PageModel
     {
-        private readonly BirthdayContext _context;
+        private readonly IBirthdayService _birthdayService;
 
-        public LastSearchModel(BirthdayContext context)
+        public LastSearchModel(IBirthdayService birthdayService)
         {
-            _context = context;
+            _birthdayService = birthdayService;
         }
 
-        public IList<Birthday> Birthdays { get; set; }
+        public IList<BirthdayDto> Birthdays { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Birthdays = await _context.Birthdays.OrderByDescending(x => x.CreatedDate).Take(20).ToListAsync();
+            Birthdays = _birthdayService.GetAllEntries();
         }
 
     }

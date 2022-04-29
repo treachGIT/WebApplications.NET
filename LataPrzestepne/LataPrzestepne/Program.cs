@@ -1,10 +1,16 @@
 using LataPrzestepne.Data;
+using LataPrzestepne.Repositories;
+using LataPrzestepne.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddTransient<IBirthdayService,BirthdayService>();
+builder.Services.AddTransient<IBirthdayRepository,BirthdayRepository>();
+
 builder.Services.AddDbContext<BirthdayContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("LataPrzestepneDB"))
 );

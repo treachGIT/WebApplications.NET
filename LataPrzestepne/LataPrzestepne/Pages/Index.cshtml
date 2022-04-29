@@ -4,30 +4,44 @@
     ViewData["Title"] = "Home page";
 }
 
-<div>
-    <form method="post">
-         <div class="form-group">
-            <b> <label asp-for="Birthday.Name" style="margin-bottom:10px"></label></b>
-            <input asp-for="Birthday.Name" class="form-control" style="margin-bottom:5px" />
-            <b><span asp-validation-for="Birthday.Name" class="form-text text-danger"></span></b>
-         </div>
-         <div class="form-group">
-            <b> <label asp-for="Birthday.Surname" style="margin-bottom:10px"></label></b>
-            <input asp-for="Birthday.Surname" class="form-control" style="margin-bottom:5px" />
-            <b><span asp-validation-for="Birthday.Surname" class="form-text text-danger"></span></b>
-         </div>
-         <div class="form-group">
-            <b> <label asp-for="Birthday.Year" style="margin-bottom:10px"></label></b>
-            <input asp-for="Birthday.Year" class="form-control" style="margin-bottom:5px" />
-            <b><span asp-validation-for="Birthday.Year" class="form-text text-danger"></span></b>
-         </div>
-        <button class="btn btn-primary" type="submit" style="margin-top:10px">Zatwierdź</button>
-    </form>
-
-    @if(@Model.Alert != String.Empty)
-    {
-        <div class="alert alert-secondary" role="alert" style="margin-top:10px">
-            @Model.Alert
-        </div>
-    }
-</div>
+<h1>Dzisiejsze wyszukiwania</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthdays[0].Year)
+            </th>
+            <th>
+                Imię i nazwisko
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthdays[0].CreatedDate)
+            </th>
+            <th>
+                Wynik
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Birthdays) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResultMessage)
+            </td>
+            <td>
+                <a asp-page="./Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
