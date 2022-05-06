@@ -1,0 +1,44 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>Dzisiejsze wyszukiwania</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthdays[0].Year)
+            </th>
+            <th>
+                Imię i nazwisko
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthdays[0].CreatedDate)
+            </th>
+            <th>
+                Wynik
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Birthdays) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResultMessage)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
