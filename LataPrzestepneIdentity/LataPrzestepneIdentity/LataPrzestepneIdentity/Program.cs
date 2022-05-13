@@ -1,3 +1,4 @@
+using LataPrzestepneIdentity;
 using LataPrzestepneIdentity.Data;
 using LataPrzestepneIdentity.Repositories;
 using LataPrzestepneIdentity.Services;
@@ -18,6 +19,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<IBirthdayService, BirthdayService>();
 builder.Services.AddTransient<IBirthdayRepository, BirthdayRepository>();
+
+builder.Services.AddBrowserDetection();
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSession(options =>
@@ -48,6 +51,13 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseBrowserDetectionMiddleware();
+app.Use((context,next) =>
+{
+    var userAgentString = context.Request.Headers["User-Agent"].ToString();
+    context.Items.Add("userAgentString", userAgentString);
+    return next();
+});
 
 app.MapRazorPages();
 
